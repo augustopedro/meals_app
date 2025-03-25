@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/models/meal.dart';
+import 'package:meals_app/widgets/meal_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
@@ -9,6 +10,10 @@ class MealItem extends StatelessWidget {
   });
 
   final Meal meal;
+
+  String capitalize(String toCapitalize) => toCapitalize.isEmpty
+      ? toCapitalize
+      : toCapitalize[0].toUpperCase() + toCapitalize.substring(1);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +58,23 @@ class MealItem extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Row(
-                      children: [],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MealItemTrait(
+                          icon: Icons.schedule,
+                          label: '${meal.duration} min',
+                        ),
+                        const SizedBox(width: 12),
+                        MealItemTrait(
+                          icon: Icons.work,
+                          label: capitalize(meal.complexity.name),
+                        ),
+                        const SizedBox(width: 12),
+                        MealItemTrait(
+                          icon: Icons.attach_money,
+                          label: capitalize(meal.affordability.name),
+                        ),
+                      ],
                     ),
                   ],
                 ),
